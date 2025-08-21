@@ -12,4 +12,13 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    modelName: "userTable",
+  },
+  account: {
+    modelName: "accountTable",
+  },
+  session: {
+    modelName: "sessionTable",
+  },
 });
