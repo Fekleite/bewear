@@ -6,10 +6,10 @@ import { SignUpForm } from "./sign-up-form";
 
 export default function AuthPage() {
   return (
-    <div className="flex h-screen flex-col">
+    <>
       <Header />
 
-      <div className="mx-auto flex w-full max-w-sm flex-1 flex-col gap-6 px-3.5 md:max-w-md lg:max-w-lg lg:justify-center">
+      <div className="mx-auto flex h-screen w-full max-w-sm flex-1 flex-col gap-6 px-3.5 pt-[72px] md:max-w-md lg:max-w-lg lg:justify-center">
         <Tabs defaultValue="sign-in">
           <TabsList>
             <TabsTrigger value="sign-in">Entrar</TabsTrigger>
@@ -25,6 +25,6 @@ export default function AuthPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </>
   );
 }

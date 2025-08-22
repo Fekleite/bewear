@@ -8,7 +8,7 @@ import { Menu } from "./menu";
 
 export function Header() {
   return (
-    <header className="flex h-[72px] w-full items-center justify-between px-6 py-4">
+    <header className="bg-background fixed top-0 flex h-[72px] w-full items-center justify-between px-6 py-4">
       <Link href="/">
         <Image src="/bewear-logo.svg" alt="BEWEAR" width={92} height={24} />
       </Link>
