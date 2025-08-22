@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppinsSans.variable} antialiased`}>
+      <body className={`${poppinsSans.variable} relative antialiased`}>
         {children}
 
         <Toaster position="bottom-center" />
