@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signInWithGoogle } from "@/lib/auth-client";
 
 const formSchema = z.object({
   email: z.email("Email inválido"),
@@ -103,9 +103,20 @@ export function SignInForm() {
               )}
             />
 
-            <Button type="submit" className="w-full">
-              Entrar
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button type="submit" className="w-full">
+                Entrar
+              </Button>
+
+              <Button
+                variant="secondary"
+                type="button"
+                className="w-full"
+                onClick={signInWithGoogle}
+              >
+                Entrar com o Google
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

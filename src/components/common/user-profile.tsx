@@ -24,7 +24,7 @@ export function UserProfile({ email, imageUrl, name }: UserProfileProps) {
 
   return (
     <div className="flex items-center gap-3">
-      <Avatar className="h-12 w-12">
+      <Avatar className="h-12 w-12 overflow-hidden rounded-full">
         <AvatarImage src={imageUrl ?? undefined} />
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>
