@@ -11,6 +11,8 @@ interface ProductItemProps {
 export function ProductItem({ product }: ProductItemProps) {
   const currentVariant = product.variants[0];
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -20,21 +22,21 @@ export function ProductItem({ product }: ProductItemProps) {
       <Image
         src={currentVariant.imageUrl}
         alt={currentVariant.name}
-        width={200}
-        height={200}
+        width={isMobile ? 200 : 400}
+        height={isMobile ? 200 : 400}
         className="rounded-3xl"
       />
 
       <div className="max-w-[200px] space-y-2">
-        <p className="truncate text-sm leading-none font-medium">
+        <p className="truncate text-sm leading-none font-medium lg:text-base lg:font-semibold">
           {product.name}
         </p>
-        <p className="text-muted-foreground truncate text-xs leading-none font-medium">
+        <p className="text-muted-foreground truncate text-xs leading-none font-medium lg:text-base">
           {product.description}
         </p>
       </div>
 
-      <span className="truncate text-sm leading-none font-semibold">
+      <span className="truncate text-sm leading-none font-semibold lg:text-base">
         {formatToCurrency(currentVariant.priceInCents)}
       </span>
     </Link>
