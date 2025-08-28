@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+
 const brands = [
   {
     id: 1,
@@ -40,25 +42,35 @@ const brands = [
 
 export function BrandList() {
   return (
-    <div className="flex w-full gap-6 overflow-x-auto scroll-smooth px-4 [&::-webkit-scrollbar]:hidden">
-      {brands.map((brand) => (
-        <div
-          key={brand.id}
-          className="flex flex-col items-center justify-start gap-4"
-        >
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl border">
-            <Image
-              src={brand.logoUrl}
-              alt={brand.name}
-              width={32}
-              height={32}
-              unoptimized
-            />
-          </div>
+    <Carousel className="w-full">
+      <CarouselContent className="-ml-6">
+        {brands.map((brand) => (
+          <CarouselItem
+            key={brand.id}
+            className="basis-[104px] pl-6 lg:basis-[196px]"
+          >
+            <div
+              key={brand.id}
+              className="flex flex-col items-center justify-start gap-4"
+            >
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border lg:h-28 lg:w-full">
+                <Image
+                  src={brand.logoUrl}
+                  alt={brand.name}
+                  width={0}
+                  height={0}
+                  unoptimized
+                  className="h-8 w-8 lg:h-12 lg:w-12"
+                />
+              </div>
 
-          <span className="whitespace-nowrap">{brand.name}</span>
-        </div>
-      ))}
-    </div>
+              <span className="text-sm font-medium whitespace-nowrap lg:text-base">
+                {brand.name}
+              </span>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
   );
 }
