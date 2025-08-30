@@ -5,12 +5,13 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Menu } from "./menu";
+import { NavigationMenu } from "./navigation-menu";
 import { UserDropdown } from "./user-dropdown";
 
 export function Header() {
   return (
-    <header className="bg-background fixed top-0 z-10 h-[72px] w-full lg:shadow-xs">
-      <div className="flex h-full w-full items-center justify-between px-6 py-4 lg:relative lg:mx-auto lg:max-w-[1440px] lg:justify-center lg:px-11">
+    <header className="bg-background fixed top-0 z-10 w-full lg:shadow-2xs">
+      <div className="flex h-[72px] w-full items-center justify-between px-6 py-4 lg:relative lg:mx-auto lg:h-auto lg:max-w-[1440px] lg:justify-center lg:px-11 lg:py-8">
         <div className="hidden lg:absolute lg:left-11 lg:block">
           <UserDropdown />
         </div>
@@ -46,6 +47,10 @@ export function Header() {
 
           <Menu />
         </div>
+      </div>
+
+      <div className="hidden lg:mx-auto lg:block lg:max-w-[1128px]">
+        <NavigationMenu />
       </div>
     </header>
   );

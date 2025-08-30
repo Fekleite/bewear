@@ -33,7 +33,7 @@ export default async function Home() {
     <>
       <Header />
 
-      <main className="my-[72px] w-full lg:mx-auto lg:max-w-[1440px]">
+      <main className="my-[72px] w-full lg:mx-auto lg:mt-[120px] lg:max-w-[1440px]">
         <section className="relative w-full px-4 lg:px-11 lg:pt-8">
           <Image
             src="/banner-01.png"
