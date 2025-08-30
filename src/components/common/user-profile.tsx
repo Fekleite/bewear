@@ -1,5 +1,7 @@
 import { Avatar } from "@radix-ui/react-avatar";
 
+import { getInitials } from "@/utils/string";
+
 import { AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface UserProfileProps {
@@ -9,17 +11,6 @@ interface UserProfileProps {
 }
 
 export function UserProfile({ email, imageUrl, name }: UserProfileProps) {
-  function getInitials(name: string) {
-    const names = name.split(" ");
-
-    if (names.length === 1) return names[0].charAt(0).toUpperCase();
-
-    return (
-      names[0].charAt(0).toUpperCase() +
-      names[names.length - 1].charAt(0).toUpperCase()
-    );
-  }
-
   const initials = getInitials(name);
 
   return (
