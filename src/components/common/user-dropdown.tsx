@@ -1,10 +1,13 @@
 "use client";
 
-import { UserIcon } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
 import { authClient, signOut } from "@/lib/auth-client";
+import { getInitials } from "@/utils/string";
 
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,12 +26,21 @@ export function UserDropdown() {
     );
   }
 
+  const initials = getInitials(session.user.name);
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="text-foreground flex items-center gap-2 font-semibold">
-        <UserIcon size={24} />
+      <DropdownMenuTrigger asChild className="">
+        <Button variant="ghost">
+          <Avatar className="h-8 w-8 overflow-hidden rounded-full">
+            <AvatarImage src={session.user.image ?? undefined} />
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
 
-        <span className="font-semibold">{session.user.name}</span>
+          <span className="text-foreground text-base font-semibold">
+            {session.user.name}
+          </span>
+        </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
@@ -38,7 +50,13 @@ export function UserDropdown() {
         <DropdownMenuItem disabled>
           <Link href="/orders">Meus Pedidos</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={signOut}>Sair</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Button variant="ghost" onClick={signOut}>
+            <LogOutIcon />
+
+            <span>Sair da conta</span>
+          </Button>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
