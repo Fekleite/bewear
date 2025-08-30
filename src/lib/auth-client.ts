@@ -7,3 +7,7 @@ export const signInWithGoogle = async () => {
     provider: "google",
   });
 };
+
+export const signOut = async () => {
+  await authClient.signOut();
+};

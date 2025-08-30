@@ -3,7 +3,7 @@
 import { LogInIcon, LogOutIcon, MenuIcon, XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient, signOut } from "@/lib/auth-client";
 
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
@@ -23,10 +23,6 @@ export function Menu() {
 
   function handleRedirectToLogin() {
     router.push("/auth");
-  }
-
-  async function handleLogout() {
-    await authClient.signOut();
   }
 
   return (
@@ -89,7 +85,7 @@ export function Menu() {
               <Button
                 variant="ghost"
                 className="text-muted-foreground justify-start"
-                onClick={handleLogout}
+                onClick={signOut}
               >
                 <LogOutIcon />
 

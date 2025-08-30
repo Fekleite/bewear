@@ -3,7 +3,7 @@
 import { UserIcon } from "lucide-react";
 import Link from "next/link";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient, signOut } from "@/lib/auth-client";
 
 import {
   DropdownMenu,
@@ -14,10 +14,6 @@ import {
 
 export function UserDropdown() {
   const { data: session } = authClient.useSession();
-
-  async function handleLogout() {
-    await authClient.signOut();
-  }
 
   if (!session?.user) {
     return (
@@ -42,7 +38,7 @@ export function UserDropdown() {
         <DropdownMenuItem disabled>
           <Link href="/orders">Meus Pedidos</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleLogout}>Sair</DropdownMenuItem>
+        <DropdownMenuItem onClick={signOut}>Sair</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
