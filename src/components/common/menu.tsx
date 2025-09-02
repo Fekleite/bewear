@@ -1,6 +1,15 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, MenuIcon, XIcon } from "lucide-react";
+import {
+  HomeIcon,
+  LogInIcon,
+  LogOutIcon,
+  MenuIcon,
+  ShoppingBagIcon,
+  TruckIcon,
+  XIcon,
+} from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { authClient, signOut } from "@/lib/auth-client";
@@ -15,6 +24,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
+import { NavigationMenu } from "./navigation-menu";
 import { UserProfile } from "./user-profile";
 
 export function Menu() {
@@ -77,6 +87,36 @@ export function Menu() {
               </Button>
             </div>
           )}
+
+          <Separator className="mx-auto max-w-64" />
+
+          <div>
+            <Link className="flex items-center gap-3 px-4 py-3" href="/">
+              <HomeIcon size={16} />
+              <span className="text-foreground text-sm font-medium">
+                Inicio
+              </span>
+            </Link>
+            <Link className="flex items-center gap-3 px-4 py-3" href="/orders">
+              <TruckIcon size={16} />
+              <span className="text-foreground text-sm font-medium">
+                Meus Pedidos
+              </span>
+            </Link>
+            <Link
+              className="flex items-center gap-3 px-4 py-3"
+              href="/checkout"
+            >
+              <ShoppingBagIcon size={16} />
+              <span className="text-foreground text-sm font-medium">
+                Sacola
+              </span>
+            </Link>
+          </div>
+
+          <Separator className="mx-auto max-w-64" />
+
+          <NavigationMenu />
 
           {session?.user && (
             <>

@@ -11,10 +11,10 @@ const menuItems = [
 
 export function NavigationMenu() {
   return (
-    <div className="flex w-full items-center justify-between gap-4 py-2">
+    <div className="flex flex-col lg:w-full lg:flex-row lg:items-center lg:justify-between lg:gap-4 lg:py-2">
       {menuItems.map((item) => (
-        <Link key={item.key} href={item.href}>
-          <span className="text-muted-foreground hover:text-foreground font-medium">
+        <Link key={item.key} href={item.href} className="px-4 py-3 lg:p-0">
+          <span className="lg:text-muted-foreground hover:text-foreground text-foreground text-sm font-medium lg:text-base">
             {item.label}
           </span>
         </Link>
