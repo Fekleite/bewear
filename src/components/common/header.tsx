@@ -2,13 +2,17 @@ import { SearchIcon, ShoppingBagIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { db } from "@/db";
+
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Menu } from "./menu";
 import { NavigationMenu } from "./navigation-menu";
 import { UserDropdown } from "./user-dropdown";
 
-export function Header() {
+export async function Header() {
+  const categories = await db.query.categoryTable.findMany();
+
   return (
     <header className="bg-background fixed top-0 z-10 w-full lg:shadow-2xs">
       <div className="flex h-[72px] w-full items-center justify-between px-6 py-4 lg:relative lg:mx-auto lg:h-auto lg:max-w-[1440px] lg:justify-center lg:px-11 lg:py-8">
@@ -45,12 +49,12 @@ export function Header() {
 
           <Separator orientation="vertical" className="max-h-4" />
 
-          <Menu />
+          <Menu categories={categories} />
         </div>
       </div>
 
       <div className="hidden lg:mx-auto lg:block lg:max-w-[1128px]">
-        <NavigationMenu />
+        <NavigationMenu categories={categories} />
       </div>
     </header>
   );

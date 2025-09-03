@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { Category } from "@/_types/category";
 import { authClient, signOut } from "@/lib/auth-client";
 
 import { Button } from "../ui/button";
@@ -27,7 +28,11 @@ import {
 import { NavigationMenu } from "./navigation-menu";
 import { UserProfile } from "./user-profile";
 
-export function Menu() {
+interface MenuProps {
+  categories: Category[];
+}
+
+export function Menu({ categories }: MenuProps) {
   const router = useRouter();
   const { data: session } = authClient.useSession();
 
@@ -116,7 +121,7 @@ export function Menu() {
 
           <Separator className="mx-auto max-w-64" />
 
-          <NavigationMenu />
+          <NavigationMenu categories={categories} />
 
           {session?.user && (
             <>
