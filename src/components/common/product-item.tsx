@@ -16,7 +16,7 @@ export function ProductItem({ product }: ProductItemProps) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="flex snap-start flex-col gap-6"
+      className="flex flex-col gap-6"
       key={product.id}
     >
       <Image
@@ -27,7 +27,7 @@ export function ProductItem({ product }: ProductItemProps) {
         className="rounded-3xl"
       />
 
-      <div className="max-w-[200px] space-y-2">
+      <div className="space-y-2">
         <p className="truncate text-sm leading-none font-medium lg:text-base lg:font-semibold">
           {product.name}
         </p>
