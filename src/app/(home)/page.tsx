@@ -5,8 +5,6 @@ import Link from "next/link";
 import { BannerGrid } from "@/components/common/banner-grid";
 import { BrandList } from "@/components/common/brand-list";
 import { CategoryList } from "@/components/common/category-list";
-import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
 import { ProductsCarousel } from "@/components/common/products-carousel";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db";
@@ -31,89 +29,83 @@ export default async function Home() {
 
   return (
     <>
-      <Header />
+      <section className="relative w-full px-4 lg:px-11 lg:pt-8">
+        <Image
+          src="/banner-01.png"
+          alt="Leve uma vida com estilo"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="h-auto w-full lg:hidden"
+        />
 
-      <main className="my-[72px] w-full lg:mx-auto lg:mt-[120px] lg:max-w-[1440px]">
-        <section className="relative w-full px-4 lg:px-11 lg:pt-8">
-          <Image
-            src="/banner-01.png"
-            alt="Leve uma vida com estilo"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="h-auto w-full lg:hidden"
-          />
+        <Image
+          src="/banner-01-desktop.png"
+          alt="Leve uma vida com estilo"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="hidden h-auto w-full lg:block"
+        />
 
-          <Image
-            src="/banner-01-desktop.png"
-            alt="Leve uma vida com estilo"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="hidden h-auto w-full lg:block"
-          />
+        <Button
+          variant="blurred"
+          className="absolute bottom-5 left-1/2 w-28 -translate-x-1/2 rounded-full border px-4 lg:bottom-11 lg:w-auto lg:border-0 lg:px-8 lg:text-lg lg:font-semibold"
+          size="lg"
+        >
+          Comprar
+        </Button>
+      </section>
 
-          <Button
-            variant="blurred"
-            className="absolute bottom-5 left-1/2 w-28 -translate-x-1/2 rounded-full border px-4 lg:bottom-11 lg:w-auto lg:border-0 lg:px-8 lg:text-lg lg:font-semibold"
-            size="lg"
-          >
-            Comprar
-          </Button>
-        </section>
+      <section className="my-8 flex w-full flex-col gap-6 px-4 lg:my-16 lg:px-11">
+        <h2 className="font-semibold lg:text-2xl">Marcas parceiras</h2>
 
-        <section className="my-8 flex w-full flex-col gap-6 px-4 lg:my-16 lg:px-11">
-          <h2 className="font-semibold lg:text-2xl">Marcas parceiras</h2>
+        <BrandList />
+      </section>
 
-          <BrandList />
-        </section>
+      <section className="flex w-full flex-col gap-6 px-4 lg:px-11">
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold lg:text-2xl">Mais vendidos</h2>
 
-        <section className="flex w-full flex-col gap-6 px-4 lg:px-11">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold lg:text-2xl">Mais vendidos</h2>
+          <Link href="/top-sale" className="hidden font-semibold lg:block">
+            Ver todos
+          </Link>
+        </div>
 
-            <Link href="/top-sale" className="hidden font-semibold lg:block">
-              Ver todos
-            </Link>
-          </div>
+        <ProductsCarousel products={products} />
+      </section>
 
-          <ProductsCarousel products={products} />
-        </section>
+      <section className="my-8 w-full px-4 lg:hidden lg:px-11">
+        <CategoryList categories={categories} />
+      </section>
 
-        <section className="my-8 w-full px-4 lg:hidden lg:px-11">
-          <CategoryList categories={categories} />
-        </section>
+      <section className="relative mb-8 w-full px-4 lg:hidden lg:px-11">
+        <Image
+          src="/banner-02.png"
+          alt="Seja autêntico"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="h-auto w-full"
+        />
 
-        <section className="relative mb-8 w-full px-4 lg:hidden lg:px-11">
-          <Image
-            src="/banner-02.png"
-            alt="Seja autêntico"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="h-auto w-full"
-          />
+        <Button
+          variant="blurred"
+          className="absolute bottom-5 left-1/2 w-28 -translate-x-1/2 rounded-full border px-4"
+        >
+          Comprar
+        </Button>
+      </section>
 
-          <Button
-            variant="blurred"
-            className="absolute bottom-5 left-1/2 w-28 -translate-x-1/2 rounded-full border px-4"
-          >
-            Comprar
-          </Button>
-        </section>
+      <section className="flex w-full flex-col gap-6 px-4 lg:hidden lg:px-11">
+        <h2 className="font-semibold">Novos produtos</h2>
 
-        <section className="flex w-full flex-col gap-6 px-4 lg:hidden lg:px-11">
-          <h2 className="font-semibold">Novos produtos</h2>
+        <ProductsCarousel products={newlyAddedProducts} />
+      </section>
 
-          <ProductsCarousel products={newlyAddedProducts} />
-        </section>
-
-        <section className="hidden w-full px-4 lg:mt-16 lg:block lg:px-11">
-          <BannerGrid />
-        </section>
-      </main>
-
-      <Footer />
+      <section className="hidden w-full px-4 lg:mt-16 lg:block lg:px-11">
+        <BannerGrid />
+      </section>
     </>
   );
 }
