@@ -15,7 +15,10 @@ export function ProductItem({ product }: ProductItemProps) {
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={{
+        pathname: `/product/${product.slug}`,
+        query: { sku: currentVariant.slug },
+      }}
       className="flex flex-col gap-6"
       key={product.id}
     >
