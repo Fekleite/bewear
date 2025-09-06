@@ -1,4 +1,4 @@
-import { SearchIcon, ShoppingBagIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,6 +6,7 @@ import { db } from "@/db";
 
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { Cart } from "./cart";
 import { Menu } from "./menu";
 import { NavigationMenu } from "./navigation-menu";
 import { UserDropdown } from "./user-dropdown";
@@ -33,19 +34,11 @@ export async function Header() {
 
           <Separator orientation="vertical" className="max-h-4" />
 
-          <Button variant="ghost" className="text-muted-foreground">
-            <ShoppingBagIcon />
-
-            <span className="sr-only">Sacola de compras</span>
-          </Button>
+          <Cart />
         </div>
 
         <div className="flex h-full items-center gap-4 lg:hidden">
-          <Button variant="ghost" className="text-muted-foreground">
-            <ShoppingBagIcon />
-
-            <span className="sr-only">Sacola de compras</span>
-          </Button>
+          <Cart />
 
           <Separator orientation="vertical" className="max-h-4" />
 
