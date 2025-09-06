@@ -8,12 +8,12 @@ import { db } from "@/db";
 import { cartItemTable, cartTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
-export const addToCartSchema = z.object({
+const addToCartSchema = z.object({
   productVariantId: z.uuid(),
   quantity: z.number().min(1),
 });
 
-export type AddToCartData = z.infer<typeof addToCartSchema>;
+type AddToCartData = z.infer<typeof addToCartSchema>;
 
 export async function addToCart(data: AddToCartData) {
   // Validar dados recebidos
