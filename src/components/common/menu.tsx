@@ -50,7 +50,7 @@ export function Menu({ categories }: MenuProps) {
         </Button>
       </SheetTrigger>
 
-      <SheetContent className="w-[350px]">
+      <SheetContent className="w-[350px] rounded-tl-3xl rounded-bl-3xl">
         <div className="flex h-full flex-col gap-6 px-5 py-6">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg font-semibold">Menu</SheetTitle>

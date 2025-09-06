@@ -21,7 +21,7 @@ export function UserProfile({ email, imageUrl, name }: UserProfileProps) {
       </Avatar>
 
       <div className="flex flex-col">
-        <span className="font-semibold">{name}</span>
+        <span className="leading-6 font-semibold">{name}</span>
         <span className="text-muted-foreground text-xs">{email}</span>
       </div>
     </div>
