@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 
 import "./globals.css";
 
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
 import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
@@ -24,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${poppinsSans.variable} relative antialiased`}>
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
 
         <Toaster position="bottom-center" />
       </body>
