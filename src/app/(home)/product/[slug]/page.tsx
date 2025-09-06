@@ -9,7 +9,9 @@ import { productTable } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import { formatToCurrency } from "@/utils/number";
 
-import { ProductActions } from "./product-actions";
+import { CTAContainer } from "./cta-container";
+import { QuantitySelector } from "./quantity-selector";
+
 interface ProductProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -93,7 +95,9 @@ export default async function Product({ params, searchParams }: ProductProps) {
             </div>
           </div>
 
-          <ProductActions variantId={currentVariant.id} />
+          <QuantitySelector variantId={currentVariant.id} />
+
+          <CTAContainer variantId={currentVariant.id} />
 
           <p className="text-sm leading-5 lg:text-base">
             {product.description}
