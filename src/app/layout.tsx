@@ -18,6 +18,8 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Toaster } from "@/components/ui/sonner";
 
+import ReactQueryProvider from "./providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${poppinsSans.variable} relative antialiased`}>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NuqsAdapter>
 
         <Toaster position="bottom-center" />
       </body>
