@@ -89,7 +89,7 @@ export function Cart() {
           </div>
 
           <div className="space-y-6">
-            {data?.totalPriceInCents && (
+            {!!data?.totalPriceInCents && (
               <>
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium">Subtotal</span>
