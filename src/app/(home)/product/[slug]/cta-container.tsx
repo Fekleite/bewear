@@ -1,11 +1,10 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
-import { addToCart } from "@/actions/add-to-cart";
 import { Button } from "@/components/ui/button";
+import { useAddToCart } from "@/hooks/mutations/use-add-to-cart";
 
 interface CTAContainerProps {
   variantId: string;
@@ -15,16 +14,11 @@ export function CTAContainer({ variantId }: CTAContainerProps) {
   const searchParams = useSearchParams();
   const quantity = searchParams.get("qtd");
 
-  const queryClient = useQueryClient();
-
   const parsedQtd = quantity ? Number(quantity) : 1;
 
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["add-to-cart", variantId, parsedQtd],
-    mutationFn: addToCart,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["get-cart"] });
-    },
+  const { mutate, isPending } = useAddToCart({
+    variantId,
+    quantity: parsedQtd,
   });
 
   function handleAddToCart() {

@@ -1,13 +1,12 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 
 import { CartItemWithVariant } from "@/_types/cart";
-import { removeFromCart } from "@/actions/remove-from-cart";
-import { updateCartItemQuantity } from "@/actions/update-cart-item-quantity";
+import { useRemoveFromCart } from "@/hooks/mutations/use-remove-from-cart";
+import { useUpdateCartItemQuantity } from "@/hooks/mutations/use-update-cart-item-quantity";
 import { formatToCurrency } from "@/utils/number";
 
 import { Button } from "../ui/button";
@@ -17,23 +16,12 @@ interface CartItemProps {
 }
 
 export function CartItem({ data }: CartItemProps) {
-  const queryClient = useQueryClient();
-
-  const { mutate: removeFromCartMutate } = useMutation({
-    mutationKey: ["remove-from-cart", data.id],
-    mutationFn: removeFromCart,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["get-cart"] });
-    },
+  const { mutate: removeFromCartMutate } = useRemoveFromCart({
+    cartItemId: data.id,
   });
 
-  const { mutate: updateCartItemQuantityMutate, isPending } = useMutation({
-    mutationKey: ["update-cart-item-quantity", data.id],
-    mutationFn: updateCartItemQuantity,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["get-cart"] });
-    },
-  });
+  const { mutate: updateCartItemQuantityMutate, isPending } =
+    useUpdateCartItemQuantity({ cartItemId: data.id });
 
   function handleRemoveFromCart() {
     removeFromCartMutate(

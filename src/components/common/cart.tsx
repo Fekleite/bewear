@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { ShoppingBagIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 
-import { getCart } from "@/actions/get-cart";
+import { useCart } from "@/hooks/queries/use-cart";
 import { formatToCurrency } from "@/utils/number";
 
 import { Button } from "../ui/button";
@@ -24,10 +23,7 @@ import { CartItem } from "./cart-item";
 export function Cart() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, isPending } = useQuery({
-    queryKey: ["get-cart"],
-    queryFn: getCart,
-  });
+  const { data, isPending } = useCart();
 
   function handleCloseCart() {
     setIsOpen(false);
