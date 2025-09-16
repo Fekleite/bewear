@@ -32,8 +32,12 @@ export function Cart() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="text-muted-foreground">
+        <Button variant="ghost" className="text-muted-foreground relative">
           <ShoppingBagIcon />
+
+          {!!data?.items.length && (
+            <div className="bg-primary absolute top-0 right-0 size-2 rounded-full lg:-top-1 lg:-right-1 lg:size-3" />
+          )}
 
           <span className="sr-only">Sacola de compras</span>
         </Button>
