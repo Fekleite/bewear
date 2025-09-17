@@ -9,20 +9,28 @@ import { Separator } from "../ui/separator";
 
 interface CheckoutItemProps {
   data: CartItemWithVariant;
+  size?: "sm" | "lg";
+  hideSeparator?: boolean;
 }
 
-export function CheckoutItem({ data }: CheckoutItemProps) {
+export function CheckoutItem({
+  data,
+  size = "lg",
+  hideSeparator = false,
+}: CheckoutItemProps) {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+
+  const desktopImageSize = size === "sm" ? 96 : 164;
 
   return (
     <>
-      <div className="relative flex items-center justify-between gap-4">
+      <div className="relative flex w-full items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Image
             src={data.productVariant.imageUrl}
             alt={data.productVariant.product.name}
-            width={isMobile ? 86 : 164}
-            height={isMobile ? 86 : 164}
+            width={isMobile ? 86 : desktopImageSize}
+            height={isMobile ? 86 : desktopImageSize}
             className="rounded-xl lg:rounded-2xl"
           />
 
@@ -60,7 +68,7 @@ export function CheckoutItem({ data }: CheckoutItemProps) {
         </span>
       </div>
 
-      <Separator />
+      {!hideSeparator && <Separator />}
     </>
   );
 }
