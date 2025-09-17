@@ -1,6 +1,7 @@
 "use client";
 
 import { ShoppingBagIcon, XIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useCart } from "@/hooks/queries/use-cart";
@@ -23,9 +24,16 @@ import { CartItem } from "./cart-item";
 export function Cart() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter();
   const { data, isPending } = useCart();
 
   function handleCloseCart() {
+    setIsOpen(false);
+  }
+
+  function handleSendToCheckout() {
+    router.push("/checkout");
+
     setIsOpen(false);
   }
 
@@ -104,7 +112,12 @@ export function Cart() {
             )}
 
             <div className="flex flex-col gap-2">
-              <Button size="lg" className="w-full rounded-full">
+              <Button
+                size="lg"
+                className="w-full rounded-full"
+                onClick={handleSendToCheckout}
+                disabled={!data?.items.length}
+              >
                 Finalizar a compra
               </Button>
 
