@@ -28,6 +28,7 @@ export const getCart = async () => {
         },
         orderBy: (items, { asc }) => [asc(items.createdAt)],
       },
+      shippingAddress: true,
     },
   });
 
