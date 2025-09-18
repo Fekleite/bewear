@@ -31,7 +31,7 @@ export default async function Identification() {
 
   return (
     <>
-      <Card className="w-full lg:max-w-xl">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="font-semibold lg:text-2xl">
             Identificação

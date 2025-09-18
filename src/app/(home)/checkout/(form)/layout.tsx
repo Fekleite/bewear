@@ -13,7 +13,7 @@ export default function CheckoutLayout({
       </section>
 
       <section className="flex w-full flex-col gap-8 px-4 lg:flex-row lg:justify-between lg:px-11">
-        <div>{children}</div>
+        <div className="lg:flex-1">{children}</div>
 
         <OrderResume />
       </section>
