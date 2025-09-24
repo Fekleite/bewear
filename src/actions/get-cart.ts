@@ -6,7 +6,7 @@ import { db } from "@/db";
 import { cartTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
-export const getCart = async () => {
+export async function getCart() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -43,6 +43,7 @@ export const getCart = async () => {
       ...newCart,
       items: [],
       totalPriceInCents: 0,
+      shippingAddress: null,
     };
   }
 
@@ -53,4 +54,4 @@ export const getCart = async () => {
       0,
     ),
   };
-};
+}
