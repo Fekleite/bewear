@@ -1,11 +1,9 @@
-import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getCart } from "@/actions/get-cart";
+import { getUserAddresses } from "@/actions/get-user-addresses";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { db } from "@/db";
-import { shippingAddressTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import { ShippingForm } from "./shipping-form";
@@ -25,9 +23,7 @@ export default async function Identification() {
     redirect("/");
   }
 
-  const shippingAddresses = await db.query.shippingAddressTable.findMany({
-    where: eq(shippingAddressTable.userId, session.user.id),
-  });
+  const shippingAddresses = await getUserAddresses();
 
   return (
     <>

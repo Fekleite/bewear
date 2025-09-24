@@ -1,9 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { ShippingAddress } from "@/_types/shipping";
@@ -19,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
+import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-address";
+import { useUpdateCartShippingAddress } from "@/hooks/mutations/use-update-cart-shipping-address";
 import { formatToFullAddress } from "@/utils/address";
 
 interface ShippingFormProps {
@@ -50,6 +55,17 @@ export function ShippingForm({
     defaultShippingAddressId ?? "new-address",
   );
 
+  const router = useRouter();
+
+  const {
+    mutate: createShippingAddressMutate,
+    isPending: isCreateShippingAddressPending,
+  } = useCreateShippingAddress();
+  const {
+    mutate: updateCartShippingAddressMutate,
+    isPending: isUpdateCartPending,
+  } = useUpdateCartShippingAddress();
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,8 +83,36 @@ export function ShippingForm({
     },
   });
 
-  function onSubmit(values: FormData) {
-    console.log(values);
+  function onSubmit(data: FormData) {
+    createShippingAddressMutate(data, {
+      onSuccess: (newAddress) => {
+        toast.success("Endereço criado com sucesso!");
+        form.reset();
+        setSelectedAddress(newAddress.id);
+      },
+      onError: (error) => {
+        toast.error("Erro ao criar endereço. Tente novamente.");
+        console.error(error);
+      },
+    });
+  }
+
+  function handleGoToPayment() {
+    if (!selectedAddress || selectedAddress === "add_new") return;
+
+    updateCartShippingAddressMutate(
+      { shippingAddressId: selectedAddress },
+      {
+        onSuccess: () => {
+          toast.success("Endereço vinculado ao carrinho!");
+          router.push("/checkout/payment");
+        },
+        onError: (error) => {
+          toast.error("Erro ao vincular endereço ao carrinho.");
+          console.error(error);
+        },
+      },
+    );
   }
 
   return (
@@ -322,12 +366,36 @@ export function ShippingForm({
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full rounded-full">
-                  Continuar com o pagamento
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full rounded-full"
+                  disabled={isCreateShippingAddressPending}
+                >
+                  {isCreateShippingAddressPending && (
+                    <Loader2Icon className="animate-spin" />
+                  )}
+                  Salvar endereço
                 </Button>
               </form>
             </Form>
           </div>
+        </>
+      )}
+
+      {shippingAddresses.length > 0 && selectedAddress !== "new-address" && (
+        <>
+          <Separator />
+
+          <Button
+            size="lg"
+            className="w-full rounded-full"
+            onClick={handleGoToPayment}
+            disabled={isUpdateCartPending}
+          >
+            {isUpdateCartPending && <Loader2Icon className="animate-spin" />}
+            Continuar com o pagamento
+          </Button>
         </>
       )}
     </div>
