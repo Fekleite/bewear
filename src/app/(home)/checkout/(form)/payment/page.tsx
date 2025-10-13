@@ -2,10 +2,11 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getCart } from "@/actions/get-cart";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/lib/auth";
 import { formatToFullAddress } from "@/utils/address";
+
+import { CompleteOrderButton } from "./complete-order-button";
 
 export default async function Payment() {
   const session = await auth.api.getSession({
@@ -42,9 +43,7 @@ export default async function Payment() {
             </div>
           )}
 
-          <Button size="lg" className="w-full rounded-full">
-            Finalizar a compra
-          </Button>
+          <CompleteOrderButton />
         </CardContent>
       </Card>
     </>
