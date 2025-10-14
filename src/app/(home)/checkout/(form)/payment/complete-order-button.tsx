@@ -9,11 +9,12 @@ import { useCompleteOrder } from "@/hooks/mutations/use-complete-order";
 import { OrderPlacedModal } from "./order-placed-modal";
 
 export function CompleteOrderButton() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate, isPending } = useCompleteOrder();
 
   function handleCompleteOrder() {
     mutate();
+    setIsModalOpen(true);
   }
 
   return (

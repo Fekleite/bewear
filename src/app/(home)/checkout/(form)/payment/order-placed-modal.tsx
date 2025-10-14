@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -45,10 +46,11 @@ export function OrderPlacedModal({
           </Button>
 
           <Button
-            variant="link"
+            variant="outline"
             className="text-foreground w-full rounded-full"
+            asChild
           >
-            Página inicial
+            <Link href="/">Página inicial</Link>
           </Button>
         </div>
       </DialogContent>
