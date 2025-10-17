@@ -13,6 +13,8 @@ import {
 import { auth } from "@/lib/auth";
 
 export const completeOrder = async () => {
+  let orderId: string | undefined;
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -72,6 +74,8 @@ export const completeOrder = async () => {
       throw new Error("Failed to create order");
     }
 
+    orderId = order.id;
+
     const orderItemsPayload: Array<typeof orderItemTable.$inferInsert> =
       cart.items.map((item) => ({
         orderId: order.id,
@@ -85,4 +89,10 @@ export const completeOrder = async () => {
     await tx.delete(cartTable).where(eq(cartTable.id, cart.id));
     await tx.delete(cartItemTable).where(eq(cartItemTable.cartId, cart.id));
   });
+
+  if (!orderId) {
+    throw new Error("Failed to create order");
+  }
+
+  return { orderId };
 };
