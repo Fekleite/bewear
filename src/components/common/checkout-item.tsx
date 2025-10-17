@@ -18,7 +18,7 @@ export function CheckoutItem({
   size = "lg",
   hideSeparator = false,
 }: CheckoutItemProps) {
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+  const isMobile = globalThis.innerWidth < 1024;
 
   const desktopImageSize = size === "sm" ? 96 : 164;
 
