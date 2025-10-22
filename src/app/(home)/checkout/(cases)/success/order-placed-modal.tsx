@@ -41,8 +41,8 @@ export function OrderPlacedModal({
         </div>
 
         <div className="space-y-3">
-          <Button size="lg" className="w-full rounded-full">
-            Ver meu pedido
+          <Button size="lg" className="w-full rounded-full" asChild>
+            <Link href="/orders">Ver meu pedido</Link>
           </Button>
 
           <Button

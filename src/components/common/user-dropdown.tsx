@@ -47,7 +47,7 @@ export function UserDropdown() {
         <DropdownMenuItem disabled>
           <Link href="/profile">Meu Perfil</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled>
+        <DropdownMenuItem asChild>
           <Link href="/orders">Meus Pedidos</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
